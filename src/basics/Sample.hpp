@@ -1,6 +1,5 @@
 #pragma once
 
-
 enum class TimeUnit
 {
     SECONDS,
@@ -8,11 +7,9 @@ enum class TimeUnit
     MICROSECONDS
 };
 
-
 template <typename V, typename T>
 struct Sample
 {
     V value;
-    T time;
+    T time_in_micros;
 };
-
