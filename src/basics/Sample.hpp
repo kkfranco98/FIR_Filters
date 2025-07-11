@@ -10,6 +10,6 @@ enum class TimeUnit
 template <typename V, typename T>
 struct Sample
 {
-    V value;
-    T time_in_micros;
+    V value = static_cast<V>(0);
+    T time_in_micros = static_cast<T>(0);
 };
