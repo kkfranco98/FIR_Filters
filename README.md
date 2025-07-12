@@ -17,6 +17,12 @@ A lightweight and flexible FIR (Finite Impulse Response) filter library for micr
 
 ---
 
+## ⚠️ Warning!
+The example files are written to be visualized using the Teleplot extension in VSCode.
+If you don't use this extension, the data printed to the serial monitor will not make much sense as displayed.
+
+---
+
 ## 📚 Usage
 
 See examples in the repository folder or run on microcontroller
