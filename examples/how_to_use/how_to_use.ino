@@ -1,6 +1,11 @@
 #include <Arduino.h>
 #include <FIR_Filters.h>
 
+// If this is the first file you're reading,
+// check the example file "how_to_use.ino" first.
+
+// ⚠️ Warning: The example files are written to be visualized using the Teleplot extension in VSCode. If you don't use this extension, the data printed to the serial monitor will not make much sense as displayed.
+
 #define FIR_TAPS 5
 #define SAMPLES 20
 /**
