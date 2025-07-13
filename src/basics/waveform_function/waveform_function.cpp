@@ -5,7 +5,7 @@
 
 double Waveform_Function::triangular_wave(double teta)
 {
-    teta = std::fmod(teta, _2_PI);
+    teta = fmod(teta, _2_PI);
 
     switch ((uint8_t)(teta / PI_2)) //* uso le equazioni della retta
     {
@@ -33,13 +33,13 @@ double Waveform_Function::triangular_wave(double teta)
 
 double Waveform_Function::sawtooth_wave(double teta)
 {
-    teta = std::fmod(teta, _2_PI);
+    teta = fmod(teta, _2_PI);
     return (teta / _2_PI);
 }
 
 int8_t Waveform_Function::square_wave(double teta)
 {
-    teta = std::fmod(teta, _2_PI);
+    teta = fmod(teta, _2_PI);
 
     if (teta < PI)
         return 1;
@@ -49,7 +49,7 @@ int8_t Waveform_Function::square_wave(double teta)
 
 int8_t Waveform_Function::pulse_width_modulation(double teta, double duty_cycle_in_percent)
 {
-    teta = std::fmod(teta, _2_PI);
+    teta = fmod(teta, _2_PI);
     if (teta < _2_PI * (duty_cycle_in_percent / 100))
         return 1;
     else

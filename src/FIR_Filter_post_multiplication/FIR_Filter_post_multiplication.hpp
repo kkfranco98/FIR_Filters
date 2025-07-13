@@ -1,4 +1,5 @@
 #include "basics/Sample.hpp"
+#include "basics/check_type.hpp"
 
 template <typename V, size_t N>
 class FIR_Filter_post_multiplication
@@ -21,7 +22,7 @@ public:
         }
 
         // Limit T a float o double
-        static_assert(std::is_same<V, float>::value || std::is_same<V, double>::value,
+        static_assert(is_same_custom<V, float>::value || is_same_custom<V, double>::value,
                       "Circular_Array_FIR_Filter can only be instantiated with float or double");
     };
 
@@ -34,7 +35,7 @@ public:
         }
 
         // Limit T a float o double
-        static_assert(std::is_same<V, float>::value || std::is_same<V, double>::value,
+        static_assert(is_same_custom<V, float>::value || is_same_custom<V, double>::value,
                       "Circular_Array_FIR_Filter can only be instantiated with float or double");
     };
 

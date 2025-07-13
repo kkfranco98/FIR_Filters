@@ -42,7 +42,23 @@ const double coefficients[FIR_TAPS] = {
 FIR_Filter_post_multiplication<double, FIR_TAPS> filter(coefficients);
 
 // Signal buffer
+#if defined(ARDUINO_AVR_UNO) || defined(__AVR_ATmega328P__)
+#pragma message("Using less samples for ARDUINO_AVR_UNO or __AVR_ATmega328P__, because of limited RAM")
+    #if (SIGNAL_TYPE == SINE_WAVES)
+        #define SIGNAL_SAMPLES 100
+        #pragma message("Using 100 samples for SINE_WAVES")
+    #elif (SIGNAL_TYPE == SINE_WAVES_WITH_MEAN_VALUE_OF_1)
+        #define SIGNAL_SAMPLES 70
+        #pragma message("Using 70 samples for SINE_WAVES_WITH_MEAN_VALUE_OF_1")
+    #elif (SIGNAL_TYPE == TRIANGULAR_WAVE)
+        #define SIGNAL_SAMPLES 120
+        #pragma message("Using 120 samples for TRIANGULAR_WAVE")
+    #endif
+#else
 #define SIGNAL_SAMPLES 200
+#endif
+
+
 double input_signal[SIGNAL_SAMPLES];
 
 void setup()
@@ -58,10 +74,14 @@ void setup()
                           0.3 * sin(2 * PI * 30 * ((double)i / (double)SIGNAL_SAMPLES));
 #elif (SIGNAL_TYPE == SINE_WAVES_WITH_MEAN_VALUE_OF_1)
         // sine with DC offset
-        input_signal[i] = 1 + sin(2 * PI * 20 * ((double)i / (double)SIGNAL_SAMPLES)); // sine wave with mean value of 1
+        #if defined(ARDUINO_AVR_UNO) || defined(__AVR_ATmega328P__)
+            input_signal[i] = 1 + sin(2 * PI * ((double)SIGNAL_SAMPLES/8.0) * ((double)i / (double)SIGNAL_SAMPLES)); // sine wave with mean value of 1
+        #else
+            input_signal[i] = 1 + sin(2 * PI * 20.0 * ((double)i / (double)SIGNAL_SAMPLES)); // sine wave with mean value of 1
+        #endif
 #elif (SIGNAL_TYPE == TRIANGULAR_WAVE)
         // triangle wave
-        input_signal[i] = Waveform_Function::triangular_wave(2 * PI * 5 * ((double)i / (double)SIGNAL_SAMPLES));
+        input_signal[i] = Waveform_Function::triangular_wave(2 * PI * ((double)SIGNAL_SAMPLES/40.0) * ((double)i / (double)SIGNAL_SAMPLES));
 #endif
     }
 }
