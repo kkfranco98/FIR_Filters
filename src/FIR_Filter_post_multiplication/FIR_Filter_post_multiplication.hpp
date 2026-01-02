@@ -4,6 +4,9 @@
 template <typename V, size_t N>
 class FIR_Filter_post_multiplication
 {
+public:
+    using value_type = V;
+
 private:
     Sample<V, uint64_t> _fir_samples[N];
     V _fir_coefficients[N];
@@ -43,7 +46,8 @@ public:
 
     bool filter_is_loaded();
 
-    const V (&get_coefficients())[N] { return _fir_coefficients; }
+    const V (&get_coefficients()) [N]
+    { return _fir_coefficients; }
 
     Sample<V, uint64_t> get_last_sample();
     V get_last_value();
