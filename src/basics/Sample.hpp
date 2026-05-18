@@ -1,5 +1,8 @@
 #pragma once
 
+namespace FIR_Filters
+{
+
 enum class TimeUnit
 {
     SECONDS,
@@ -13,3 +16,5 @@ struct Sample
     V value = static_cast<V>(0);
     T time_in_micros = static_cast<T>(0);
 };
+
+} // namespace FIR_Filters

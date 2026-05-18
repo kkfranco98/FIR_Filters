@@ -3,6 +3,9 @@
 #define _2_PI 6.283185307179586476925286766559
 #define PI_2 1.5707963267948966192313216916398
 
+namespace FIR_Filters
+{
+
 double Waveform_Function::triangular_wave(double teta)
 {
     teta = fmod(teta, _2_PI);
@@ -55,3 +58,5 @@ int8_t Waveform_Function::pulse_width_modulation(double teta, double duty_cycle_
     else
         return 0;
 }
+
+} // namespace FIR_Filters

@@ -24,5 +24,11 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/kkfranco98/FIR_Filters"
-    }
+    },
+    "dependencies": [
+        {
+            "name": "RingBuffer",
+            "version": "0.3.0"
+        }
+    ]
 }

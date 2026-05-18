@@ -1,5 +1,8 @@
 #pragma once
 
+namespace FIR_Filters
+{
+
 // Caso base: se i tipi non sono uguali, is_same_custom::value sarà false
 template <typename T, typename U>
 struct is_same_custom
@@ -13,3 +16,5 @@ struct is_same_custom<T, T>
 {
     static const bool value = true;
 };
+
+} // namespace FIR_Filters

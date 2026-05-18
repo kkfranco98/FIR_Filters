@@ -1,5 +1,11 @@
+#pragma once
+
 #include "basics/Sample.hpp"
 #include "basics/check_type.hpp"
+#include <RingBuffer.h>
+
+namespace FIR_Filters
+{
 
 template <typename V, size_t N>
 class FIR_Filter_post_multiplication
@@ -8,16 +14,13 @@ public:
     using value_type = V;
 
 private:
-    Sample<V, uint64_t> _fir_samples[N];
+    Ring_Buffer<Sample<V, uint64_t>, N> _fir_samples;
     V _fir_coefficients[N];
 
-    double _instantaneous_derivative[N];
-
-    uint32_t _current_index, _previous_index, _computed_samples;
+    Ring_Buffer<double, N> _instantaneous_derivatives;
 
 public:
-    FIR_Filter_post_multiplication() : _current_index(0),
-                                       _previous_index(N - 1)
+    FIR_Filter_post_multiplication()
     {
         for (size_t i = 0; i < N; i++)
         {
@@ -29,8 +32,7 @@ public:
                       "Circular_Array_FIR_Filter can only be instantiated with float or double");
     };
 
-    FIR_Filter_post_multiplication(const V (&coefficients)[N]) : _current_index(0),
-                                                                 _previous_index(N - 1)
+    FIR_Filter_post_multiplication(const V (&coefficients)[N])
     {
         for (size_t i = 0; i < N; i++)
         {
@@ -62,7 +64,7 @@ public:
     //     V result = 0;
     //     for (uint32_t i = 0; i < N; i++)
     //     {
-    //         result += _fir_coefficients[i] * _instantaneous_derivative[(_current_index - i + N) % N];
+    //         result += _fir_coefficients[i] * _instantaneous_derivatives.at(_instantaneous_derivatives.size() - 1 - i);
     //     }
     //     return result;
     // }
@@ -70,5 +72,7 @@ public:
 private:
     uint64_t convert_to_microseconds(uint64_t time, TimeUnit unit);
 };
+
+} // namespace FIR_Filters
 
 #include "FIR_Filter_post_multiplication.tpp"
