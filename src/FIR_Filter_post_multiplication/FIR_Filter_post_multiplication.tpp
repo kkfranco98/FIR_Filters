@@ -91,8 +91,8 @@ namespace FIR_Filters
     template <typename V, size_t N>
     void FIR_Filter_post_multiplication<V, N>::reset()
     {
-        _fir_samples = Ring_Buffer<Sample<V, uint64_t>, N>();
-        _instantaneous_derivatives = Ring_Buffer<double, N>();
+        _fir_samples = Tiny_Ring_Buffer<Sample<V, uint64_t>, N>();
+        _instantaneous_derivatives = Tiny_Ring_Buffer<double, N>();
     }
 
     template <typename V, size_t N>

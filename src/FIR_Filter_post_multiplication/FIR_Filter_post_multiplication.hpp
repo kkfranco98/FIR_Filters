@@ -2,7 +2,7 @@
 
 #include "basics/Sample.hpp"
 #include "basics/check_type.hpp"
-#include <RingBuffer.h>
+#include <TinyRingBuffer.h>
 
 namespace FIR_Filters
 {
@@ -13,10 +13,10 @@ namespace FIR_Filters
         using value_type = V;
 
     private:
-        Ring_Buffer<Sample<V, uint64_t>, N> _fir_samples;
+        Tiny_Ring_Buffer<Sample<V, uint64_t>, N> _fir_samples;
         V _fir_coefficients[N];
 
-        Ring_Buffer<double, N> _instantaneous_derivatives;
+        Tiny_Ring_Buffer<double, N> _instantaneous_derivatives;
 
     public:
         FIR_Filter_post_multiplication()
