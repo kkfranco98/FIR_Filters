@@ -26,6 +26,9 @@
         "url": "https://github.com/kkfranco98/FIR_Filters"
     },
     "dependencies": [
-        "https://github.com/kkfranco98/TinyRingBuffer.git#v1.0.0"
+        {
+            "name": "TinyRingBuffer",
+            "version": "https://github.com/kkfranco98/TinyRingBuffer.git#v1.0.0"
+        }
     ]
 }
